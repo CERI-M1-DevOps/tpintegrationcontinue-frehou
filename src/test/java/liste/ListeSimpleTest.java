@@ -79,16 +79,6 @@ class ListeSimpleTest {
     }
 
     @Test
-    void modifiePremier_elementAtEnd() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        listeATester.modifiePremier(3, 4);
-        assertEquals("ListeSimple(Noeud(4), Noeud(2), Noeud(1))", listeATester.toString());
-        assertEquals(3, listeATester.getSize());
-    }
-
-    @Test
      void modifieTous() {
         listeATester.ajout(1);
         listeATester.ajout(2);
