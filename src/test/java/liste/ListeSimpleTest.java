@@ -54,13 +54,30 @@ class ListeSimpleTest {
     }
 
     @Test
-     void modifiePremier() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        listeATester.modifiePremier(2, 4);
-        assertEquals( "ListeSimple(Noeud(3), Noeud(4), Noeud(1))",listeATester.toString());
-        assertEquals(4, listeATester.tete.getSuivant().getElement());
+    void modifiePremier() {
+        ListeSimple listeVide = new ListeSimple();
+        listeVide.modifiePremier(2, 4);
+        assertEquals("ListeSimple()", listeVide.toString());
+
+        ListeSimple listeDebut = new ListeSimple();
+        listeDebut.ajout(2);
+        listeDebut.ajout(3);
+        listeDebut.modifiePremier(2, 4);
+        assertEquals("ListeSimple(Noeud(4), Noeud(3))", listeDebut.toString());
+
+        ListeSimple listeMilieu = new ListeSimple();
+        listeMilieu.ajout(1);
+        listeMilieu.ajout(2);
+        listeMilieu.ajout(3);
+        listeMilieu.modifiePremier(2, 4);
+        assertEquals("ListeSimple(Noeud(3), Noeud(4), Noeud(1))", listeMilieu.toString());
+
+        ListeSimple listeFin = new ListeSimple();
+        listeFin.ajout(1);
+        listeFin.ajout(3);
+        listeFin.ajout(2);
+        listeFin.modifiePremier(2, 4);
+        assertEquals("ListeSimple(Noeud(1), Noeud(3), Noeud(4))", listeFin.toString());
     }
 
     @Test
