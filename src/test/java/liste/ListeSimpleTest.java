@@ -97,6 +97,22 @@ class ListeSimpleTest {
     }
 
     @Test
+    public void supprimePremier_emptyList() {
+        listeATester.supprimePremier(1);
+        assertNull(listeATester.tete);
+        assertEquals(0, listeATester.getSize());
+    }
+
+    @Test
+    public void supprimePremier_elementNotFound() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.supprimePremier(3);
+        assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+        assertEquals(2, listeATester.getSize());
+    }
+
+    @Test
      void supprimePremierEnPremierePosition() {
         listeATester.ajout(1);
         listeATester.ajout(2);
