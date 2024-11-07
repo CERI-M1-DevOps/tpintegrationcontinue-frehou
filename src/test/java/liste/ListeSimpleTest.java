@@ -54,30 +54,38 @@ class ListeSimpleTest {
     }
 
     @Test
-    void modifiePremier() {
-        ListeSimple listeVide = new ListeSimple();
-        listeVide.modifiePremier(2, 4);
-        assertEquals("ListeSimple()", listeVide.toString());
+     void modifiePremier() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.ajout(3);
+        listeATester.modifiePremier(2, 4);
+        assertEquals( "ListeSimple(Noeud(3), Noeud(4), Noeud(1))",listeATester.toString());
+        assertEquals(4, listeATester.tete.getSuivant().getElement());
+    }
+    @Test
+    void modifiePremier_emptyList() {
+        listeATester.modifiePremier(1, 2);
+        assertNull(listeATester.tete);
+        assertEquals(0, listeATester.getSize());
+    }
 
-        ListeSimple listeDebut = new ListeSimple();
-        listeDebut.ajout(2);
-        listeDebut.ajout(3);
-        listeDebut.modifiePremier(2, 4);
-        assertEquals("ListeSimple(Noeud(4), Noeud(3))", listeDebut.toString());
+    @Test
+    void modifiePremier_elementNotFound() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.modifiePremier(3, 4);
+        assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+        assertEquals(2, listeATester.getSize());
+    }
 
-        ListeSimple listeMilieu = new ListeSimple();
-        listeMilieu.ajout(1);
-        listeMilieu.ajout(2);
-        listeMilieu.ajout(3);
-        listeMilieu.modifiePremier(2, 4);
-        assertEquals("ListeSimple(Noeud(3), Noeud(4), Noeud(1))", listeMilieu.toString());
-
-        ListeSimple listeFin = new ListeSimple();
-        listeFin.ajout(1);
-        listeFin.ajout(3);
-        listeFin.ajout(2);
-        listeFin.modifiePremier(2, 4);
-        assertEquals("ListeSimple(Noeud(1), Noeud(3), Noeud(4))", listeFin.toString());
+    @Test
+    void modifiePremier_elementAtEnd() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.ajout(3);
+        listeATester.modifiePremier(3, 4);
+        assertEquals("ListeSimple(Noeud(2), Noeud(1), Noeud(4))", listeATester.toString());
+        assertEquals(3, listeATester.getSize());
     }
 
     @Test
