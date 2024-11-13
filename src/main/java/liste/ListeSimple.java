@@ -1,26 +1,53 @@
 package liste;
 
+
 public class ListeSimple {
+
     private long size;
     Noeud tete;
 
+    /**
+     * Retourne la taille actuelle de la liste.
+     * @return La taille de la liste.
+     */
     public long getSize() {
         return size;
     }
 
+    /**
+     * Ajoute un élément au début de la liste.
+     * @param element L'élément à ajouter.
+     */
     public void ajout(int element) {
         tete = new Noeud(element, tete);
         size++;
     }
 
+    /**
+     * Modifie la première occurrence d'un élément dans la liste.
+     * @param element L'élément à modifier.
+     * @param nouvelleValeur La nouvelle valeur à attribuer.
+     */
     public void modifiePremier(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
-        while (courant != null && courant.getElement() != element)
-            courant = courant.getSuivant();
-        if (courant != null)
-            courant.setElement(nouvelleValeur);
+        if (courant != null) {
+            // Recherche de l'élément
+            while (courant != null && courant.getElement() != element) {
+                courant = courant.getSuivant();
+            }
+
+            // Si l'élément est trouvé, on le modifie
+            if (courant != null) {
+                courant.setElement(nouvelleValeur);
+            }
+        }
     }
 
+    /**
+     * Modifie toutes les occurrences d'un élément dans la liste.
+     * @param element L'élément à modifier.
+     * @param nouvelleValeur La nouvelle valeur à attribuer.
+     */
     public void modifieTous(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null) {
@@ -30,6 +57,10 @@ public class ListeSimple {
         }
     }
 
+    /**
+     * Retourne une représentation sous forme de chaîne de caractères de la liste.
+     * @return La chaîne de caractères représentant la liste.
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder("ListeSimple(");
         Noeud n = tete;
@@ -43,19 +74,28 @@ public class ListeSimple {
         return sb.toString();
     }
 
+    /**
+     * Supprime la première occurrence d'un élément de la liste.
+     * @param element L'élément à supprimer.
+     */
     public void supprimePremier(Object element) {
         if (tete != null) {
+            // Cas où l'élément à supprimer est le premier de la liste
             if (tete.getElement() == element) {
                 tete = tete.getSuivant();
                 size--;
                 return;
             }
+
             Noeud precedent = tete;
             Noeud courant = tete.getSuivant();
+            // Recherche de l'élément à supprimer
             while (courant != null && courant.getElement() != element) {
-                precedent = precedent.getSuivant();
+                precedent = courant;
                 courant = courant.getSuivant();
             }
+
+            // Si l'élément est trouvé, on le supprime
             if (courant != null) {
                 precedent.setSuivant(courant.getSuivant());
                 size--;
@@ -63,8 +103,11 @@ public class ListeSimple {
         }
     }
 
+
+
+
     public void supprimeTous(int element) {
-       tete = supprimeTousRecurs(element, tete);
+        tete = supprimeTousRecurs(element, tete);
     }
 
     public Noeud supprimeTousRecurs(Object element, Noeud tete) {
@@ -107,7 +150,7 @@ public class ListeSimple {
     }
 
     public Noeud getPrecedent(Noeud r) {
-    // la liste n'est pas vide puisqu'on transmet un Node de la liste et le Node existe obligatoirement
+        // la liste n'est pas vide puisqu'on transmet un Node de la liste et le Node existe obligatoirement
         Noeud precedent = tete;
         Noeud courant = precedent.getSuivant();
         while (courant != r) {
@@ -118,28 +161,29 @@ public class ListeSimple {
     }
 
     public void echanger(Noeud r1, Noeud r2) {
-        if (r1 == r2)
-            return;
-        Noeud precedentR1;
-        Noeud  precedentR2;
-        if (r1 != tete && r2 != tete) {
-            precedentR1 = getPrecedent(r1);
-            precedentR2 = getPrecedent(r2);
-            precedentR1.setSuivant(r2);
-            precedentR2.setSuivant(r1);
-        } else if (r1 == tete) {
-            precedentR2 = getPrecedent(r2);
-            precedentR2.setSuivant(tete);
-            tete = r2;
-        }
-        else {
-            precedentR1 = getPrecedent(r1);
-            precedentR1.setSuivant(tete);
-            tete = r1;
-        }
-        Noeud temp = r2.getSuivant();
-        r2.setSuivant(r1.getSuivant());
-        r1.setSuivant(temp);
-    }
+        if (r1 != r2) {
+
+            Noeud precedentR1;
+            Noeud precedentR2;
+            if (r1 != tete && r2 != tete) {
+                precedentR1 = getPrecedent(r1);
+                precedentR2 = getPrecedent(r2);
+                precedentR1.setSuivant(r2);
+                precedentR2.setSuivant(r1);
+            } else if (r1 == tete) {
+                precedentR2 = getPrecedent(r2);
+                precedentR2.setSuivant(tete);
+                tete = r2;
+            }
+            else {
+                precedentR1 = getPrecedent(r1);
+                precedentR1.setSuivant(tete);
+                tete = r1;
+            }
+            Noeud temp = r2.getSuivant();
+            r2.setSuivant(r1.getSuivant());
+            r1.setSuivant(temp);
+        }}
+
 
 }
